@@ -22,34 +22,48 @@
         android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
+        android:onClick="generateRandomEquation"
         android:text="Generate Flashcard"
         app:layout_constraintBottom_toTopOf="@+id/txtFlashcard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/inputUserAnswer"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="What is the answer?"
-        android:inputType="textPersonName"
+        android:inputType="number|numberDecimal|numberSigned"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFlashcard" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSubmit"
         android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
+        android:onClick="submitAnswer"
         android:text="Submit Answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputUserAnswer" />
+
+    <TextView
+        android:id="@+id/txtAnswer"
+        android:layout_width="215dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
