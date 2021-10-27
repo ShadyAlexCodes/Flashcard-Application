@@ -1,7 +1,5 @@
 package com.example.flashcardapplication;
 
-import static java.lang.Thread.sleep;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,11 +7,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
 
     // Define the variables on a global scope
     int firstNumber;
@@ -28,14 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void generateRandomEquation(View view) {
         // Pull the Flashcard Output Box
-        TextView txtFlashcard = findViewById(R.id.txtFlashcard);
+        TextView txtFlashcard = (TextView) findViewById(R.id.txtFlashcard);
+
+        // Pull the User input box (Making sure that it is empty!)
+        EditText getTextUserInput = (EditText) findViewById(R.id.inputUserAnswer);
+        // Set the text input to empty
+        getTextUserInput.setText("");
 
         // Assign and generate a random number in the range 1, 20
         this.firstNumber = generateRandomNumber(1, 20);
         this.secondNumber = generateRandomNumber(1, 20);
 
         // Generate a random equation situation (Addition, Subtraction, Multiplication, Division)
-        int randomEquation = generateRandomNumber(1, 4);
+        int randomEquation = generateRandomNumber(1, 5);
 
         // Create a switch statement to catch the number values
         switch(randomEquation) {
@@ -63,14 +66,19 @@ public class MainActivity extends AppCompatActivity {
             // Check if the random number is 4
             case 4:
                 // Display the output to the user
-                txtFlashcard.setText(firstNumber + " / " + secondNumber + " = ?");
+                txtFlashcard.setText(firstNumber + " / " + secondNumber + " = ?\n Round to the nearest whole number");
                 // Define the answer by diving the values
-                answer = firstNumber / secondNumber;
+                answer = Math.round(firstNumber / secondNumber);
+                break;
+            case 5:
+                txtFlashcard.setText(firstNumber + " % " + secondNumber + " = ?");
+                answer = firstNumber % secondNumber;
                 break;
             // Add default check case in the event of an error
             default:
                 // Alert the user of an issue
                 txtFlashcard.setText("There was an error generating the random Number");
+                break;
         }
 
     }
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         EditText getTextUserInput = (EditText) findViewById(R.id.inputUserAnswer);
 
         // Grab the output boxes for both the flashcard and answer.
-        TextView txtFlashcard = findViewById(R.id.txtFlashcard);
+        TextView txtFlashcard = (TextView) findViewById(R.id.txtFlashcard);
         TextView txtAnswer = (TextView) findViewById(R.id.txtAnswer);
 
         // Create a variable to hold the user output
@@ -99,17 +107,17 @@ public class MainActivity extends AppCompatActivity {
                 // Set the Text Color to Green
                 txtAnswer.setTextColor(Color.GREEN);
                 // Inform the user they completed the problem!
-                txtAnswer.setText("Awesome! You got the answer correct!");
+                txtAnswer.setText("Awesome!\nYou answered the problem correctly!");
+
             } else {
                 // Set the Text Color to Red
                 txtAnswer.setTextColor(Color.RED);
                 // Inform the user that they got the problem incorrect.
-                txtAnswer.setText("Awh! You got the answer wrong! Try again.");
+                txtAnswer.setText("Awh!\n You answered the problem incorrectly...\nTry again.");
             }
             // Remove the error message
             getTextUserInput.setError(null);
         }
-
     }
 
     public int generateRandomNumber(int min, int max) {
